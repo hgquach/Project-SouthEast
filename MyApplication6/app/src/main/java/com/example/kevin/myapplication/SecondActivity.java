@@ -38,6 +38,7 @@ public class SecondActivity extends ActionBarActivity implements View.OnClickLis
     private TextView view5;
     String title=null;
     String URL=null;
+    boolean canPressButton=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +86,7 @@ public class SecondActivity extends ActionBarActivity implements View.OnClickLis
 
     public void onClick(View v) {
 
+        canPressButton=false;
         Intent intent = getIntent();
         String topicNum = intent.getStringExtra("topicNum");
         myAsyncTask mTask = new myAsyncTask();
@@ -233,6 +235,7 @@ public class SecondActivity extends ActionBarActivity implements View.OnClickLis
             view4.setTextColor(Color.BLACK);
             view4.setTextColor(Color.BLACK);
             //ideas.clear();
+            canPressButton=true;
         }
     }
 

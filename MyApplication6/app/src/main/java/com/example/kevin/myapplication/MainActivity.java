@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -30,6 +31,7 @@ public class MainActivity extends ActionBarActivity {
     String topicNum=null;
     String generalTopic=null;
     String URL=null;
+    boolean canPressButton=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,49 +47,53 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(final CircularView view){
             }
             public void onMarkerClick(CircularView view, Marker marker, int position){
-                switch (marker.getId()) {
-            case 1:
-                topicNum="1003";
-                generalTopic="US";
-                break;
-            case 2:
-                topicNum="1004";
-                generalTopic="World";
-                break;
-            case 3:
-                topicNum="1014";
-                generalTopic="Politics";
-                break;
-            case 4:
-                topicNum="1006";
-                generalTopic="Business";
-                break;
-            case 5:
-                topicNum="1019";
-                generalTopic="Technology";
-                break;
+                if(canPressButton) {
+                    canPressButton=false;
+                    switch (marker.getId()) {
+                        case 1:
+                            topicNum = "1003";
+                            generalTopic = "US";
+                            break;
+                        case 2:
+                            topicNum = "1004";
+                            generalTopic = "World";
+                            break;
+                        case 3:
+                            topicNum = "1014";
+                            generalTopic = "Politics";
+                            break;
+                        case 4:
+                            topicNum = "1006";
+                            generalTopic = "Business";
+                            break;
+                        case 5:
+                            topicNum = "1019";
+                            generalTopic = "Technology";
+                            break;
 
-            case 6:
-                topicNum="1007";
-                generalTopic="Science";
-                break;
-            case 7:
-                topicNum="1128";
-                generalTopic="Health";
-                break;
-            case 8:
-                topicNum="1015";
-                generalTopic="Race/Culture";
-                break;
-            case 9:
-                topicNum="1013";
-                generalTopic="Education";
-                break;
-            default:
-                break;
-        }
-        myAsyncTask mTask = new myAsyncTask();
-        mTask.execute(topicNum);
+                        case 6:
+                            topicNum = "1007";
+                            generalTopic = "Science";
+                            break;
+                        case 7:
+                            topicNum = "1128";
+                            generalTopic = "Health";
+                            break;
+                        case 8:
+                            topicNum = "1015";
+                            generalTopic = "Race/Culture";
+                            break;
+                        case 9:
+                            topicNum = "1013";
+                            generalTopic = "Education";
+                            break;
+                        default:
+                            break;
+                    }
+
+                    myAsyncTask mTask = new myAsyncTask();
+                    mTask.execute(topicNum);
+                }
             }
         });
     }
@@ -279,6 +285,7 @@ public class MainActivity extends ActionBarActivity {
         }
 
         protected void onPostExecute(String title) {
+            canPressButton = true;
             Intent i= new Intent(MainActivity.this,SecondActivity.class);
             i.putExtra("title", title);
             i.putStringArrayListExtra("strings", ideas);
