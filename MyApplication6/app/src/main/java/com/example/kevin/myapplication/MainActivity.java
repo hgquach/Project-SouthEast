@@ -42,6 +42,7 @@ public class MainActivity extends ActionBarActivity {
         circularView.setAdapter(mAdapter);
 
 
+        //Random change
 
         circularView.setOnCircularViewObjectClickListener(new CircularView.OnClickListener(){
             public void onClick(final CircularView view){
